@@ -1,3 +1,5 @@
+[![Java CI with Maven](https://github.com/ToMrArcher/ComplicatedBitchServer/actions/workflows/maven.yml/badge.svg)](https://github.com/ToMrArcher/ComplicatedBitchServer/actions/workflows/maven.yml)
+
 # Complicated Bitch Server
 ###### Made by Syvert Andreas Eidjord and Herman Svendsen Loen
 
