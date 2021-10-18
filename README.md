@@ -1,5 +1,7 @@
 # Complicated Bitch Server
-## Made by Syvert Andreas Eidjord and Herman Svendsen Loen
+###### Made by Syvert Andreas Eidjord and Herman Svendsen Loen
+
+##Todo
 
 * [x] Maven
 * [ ] GitHub Actions
