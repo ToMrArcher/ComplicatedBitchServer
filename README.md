@@ -4,9 +4,10 @@
 ##Todo
 
 * [x] Maven
-* [ ] GitHub Actions
-* [ ] Working Branch
-* [ ] Client connect to server
+* [x] GitHub Actions
+* [x] Working Branch
+* [x] Client connect to server
+* [ ] Create HttpResponse message body !!!!!!
 * [ ] Client to process GET and POST requests
 * [ ] Client to handle 200
 * [ ] Client to handle 304
