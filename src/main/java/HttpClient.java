@@ -39,16 +39,10 @@ public class HttpClient {
     }
 
     private void getRequest() throws IOException {
-        System.out.println(createGetRequest());
         socket.getOutputStream().write(createGetRequest().getBytes());
 
-        StringBuilder messageString = new StringBuilder();
-
-        int c;
-        while((c = socket.getInputStream().read()) != -1){
-            messageString.append((char)c);
-        }
-        System.out.println(messageString.toString());
+        HttpResponse response = new HttpResponse(socket);
+        System.out.println(response.getHeader("Content-Length"));
     }
 
     private void postRequest() {
