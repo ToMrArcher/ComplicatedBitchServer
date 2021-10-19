@@ -42,7 +42,7 @@ public class HttpClient {
         socket.getOutputStream().write(createGetRequest().getBytes());
 
         HttpResponse response = new HttpResponse(socket);
-        System.out.println(response.getHeader("Content-Length"));
+        System.out.println(response.getMessageBody());
     }
 
     private void postRequest() {
