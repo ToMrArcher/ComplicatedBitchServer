@@ -1,23 +1,17 @@
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 public class HttpClient {
 
-    private final ArrayList<String> allowedRequestMethods = new ArrayList<String>(List.of(new String[]{"GET", "POST"}));
-
-    HttpResponse httpResponse;
-
-    public void get(String host, int port, String path) throws IOException {
+    public HttpResponse get(String host, int port, String path) throws IOException {
         Socket socket = new Socket(host, port);
         socket.getOutputStream().write(createGetRequest(path, host).getBytes());
 
-        httpResponse = new HttpResponse(socket);
+        return new HttpResponse(socket);
     }
 
-    private void postRequest() {
-
+    public HttpResponse post() {
+        return null;
     }
 
 
@@ -28,16 +22,17 @@ public class HttpClient {
                          "Connection: close\r\n\r\n", path, url);
     }
 
-    public HttpResponse response(){
-        return httpResponse;
+    private String createPostRequest(String path, String messageBody){
+        return String.format("POST %s HTTP/1.1\r\n" +
+                             "Content-Length: %o\r\n\r\n" +
+                             "%s", path, messageBody.getBytes().length, messageBody);
     }
 
     public static void main(String[] args) throws IOException {
         HttpClient httpClient = new HttpClient();
-        httpClient.get("httpbin.org", 80, "/html");
-        System.out.println(httpClient.response().getMessageBody());
-        httpClient.get("httpbin.org", 80, "/");
-        System.out.println(httpClient.response().getMessageBody());
-
+        HttpResponse response = httpClient.get("httpbin.org", 80, "/");
+        HttpResponse response2 = httpClient.get("httpbin.org", 80, "/html");
+        System.out.println(response.getMessageBody());
+        System.out.println(response2.getMessageBody());
     }
 }

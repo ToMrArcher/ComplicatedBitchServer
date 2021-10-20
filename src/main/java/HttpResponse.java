@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class HttpResponse {
 
-    private String statusLine;
-    private Socket socket;
-    private Map<String, String> headers = new HashMap();
+    private final String statusLine;
+    private final Socket socket;
+    private final Map<String, String> headers = new HashMap();
     private String messageBody = "";
 
     public HttpResponse(Socket socket) throws IOException {
