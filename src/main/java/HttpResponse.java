@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 public class HttpResponse extends HttpMessage {
 
@@ -13,5 +14,20 @@ public class HttpResponse extends HttpMessage {
 
     public String getStatusCode() {
         return statusCode;
+    }
+
+
+    public static String create200Response(String connection, String messageBody){
+        return String.format("HTTP/1.1 200 OK\r\n" +
+                "Connection: %s\r\n" +
+                "Content-Length: %o\r\n\r\n" +
+                "%s", connection, messageBody.getBytes().length, messageBody);
+    }
+
+    public static String create404Response(String connection, String messageBody){
+        return String.format("HTTP/1.1 404 Not Found\r\n" +
+                "Connection: %s\r\n" +
+                "Content-Length: %o\r\n\r\n" +
+                "%s", connection, messageBody.getBytes().length, messageBody);
     }
 }

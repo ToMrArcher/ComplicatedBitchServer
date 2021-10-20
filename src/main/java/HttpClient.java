@@ -27,12 +27,4 @@ public class HttpClient {
                              "Content-Length: %o\r\n\r\n" +
                              "%s", path, messageBody.getBytes().length, messageBody);
     }
-
-    public static void main(String[] args) throws IOException {
-        HttpClient httpClient = new HttpClient();
-        HttpResponse response = httpClient.get("httpbin.org", 80, "/");
-        HttpResponse response2 = httpClient.get("httpbin.org", 80, "/html");
-        System.out.println(response.getMessageBody());
-        System.out.println(response2.getMessageBody());
-    }
 }

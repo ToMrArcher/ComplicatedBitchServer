@@ -6,7 +6,7 @@ public class HttpServer {
 
     private ServerSocket serverSocket;
 
-    public void HttpServer(int port) throws IOException {
+    public HttpServer(int port) throws IOException {
         serverSocket = new ServerSocket(port);
         new Thread(this::handleClients).start();
     }
@@ -27,10 +27,10 @@ public class HttpServer {
         String requestMethod = request.getRequestMethod();
         switch (requestMethod) {
             case "GET":
-                get(request);
+                get(socket, request);
                 break;
             case "POST":
-                post(request);
+                post(socket, request);
                 break;
             default:
                 throw new IllegalArgumentException();
@@ -38,12 +38,22 @@ public class HttpServer {
 
     }
 
-    private void post(HttpRequest request) {
+    private void post(Socket socket, HttpRequest request) {
 
     }
 
-    private void get(HttpRequest request) {
+    private void get(Socket socket, HttpRequest request) throws IOException {
+
+        socket.getOutputStream().write(HttpResponse.create200Response("close", "Hello World").getBytes());
 
     }
+
+    public static void main(String[] args) throws IOException {
+        HttpServer server = new HttpServer(80);
+        HttpClient client = new HttpClient();
+        HttpResponse localhost = client.get("localhost", 80, "/");
+        System.out.println(localhost.getStatusLine());
+    }
+
 
 }
