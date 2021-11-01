@@ -25,7 +25,6 @@ public class HttpServer {
         Socket socket = serverSocket.accept();
         HttpRequest request = new HttpRequest(socket);
         String requestMethod = request.getRequestMethod();
-        System.out.println(requestMethod);
         switch (requestMethod) {
             case "GET":
                 get(socket, request);
@@ -45,7 +44,7 @@ public class HttpServer {
 
     private void get(Socket socket, HttpRequest request) throws IOException {
 
-        socket.getOutputStream().write(HttpResponse.create200Response("close", "Hello World").getBytes());
+        socket.getOutputStream().write(HttpResponse.create200Response("keep-alive", "Hello World!").getBytes());
 
     }
 
@@ -53,8 +52,8 @@ public class HttpServer {
         try {
             HttpServer server = new HttpServer(80);
             HttpClient client = new HttpClient();
-            HttpResponse response = client.get("localhost", 80, "/");
-            System.out.println(response.getMessageBody());
+            HttpResponse localhost = client.get("localhost", 80, "/");
+            System.out.println(localhost.getHeader("Content-Length"));
         } catch (IOException e) {
             e.printStackTrace();
         }
