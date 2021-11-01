@@ -1,7 +1,5 @@
 package person;
 
-import javax.sql.DataSource;
-
 public class Person {
     private String firstName;
     private String lastName;

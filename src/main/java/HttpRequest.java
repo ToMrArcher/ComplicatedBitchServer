@@ -8,7 +8,7 @@ public class HttpRequest extends HttpMessage{
 
     public HttpRequest(Socket socket) throws IOException {
         super(socket);
-        String statusLines[] = getStatusLine().split(" ");
+        String[] statusLines = getStatusLine().split(" ");
         this.requestMethod = statusLines[0];
         this.path = statusLines[1];
     }

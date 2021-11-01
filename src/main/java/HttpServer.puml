@@ -1,0 +1,11 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+Alice -> Stan: What is this, this is so cool!
+Bob <- Stan: Returning this stuff i guess
+Bob -> Bob: Doing something weir
+@enduml

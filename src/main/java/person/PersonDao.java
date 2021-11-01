@@ -1,7 +1,5 @@
 package person;
 
-import person.Person;
-
 import javax.sql.DataSource;
 import java.sql.*;
 

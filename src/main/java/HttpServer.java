@@ -4,7 +4,7 @@ import java.net.Socket;
 
 public class HttpServer {
 
-    private ServerSocket serverSocket;
+    private final ServerSocket serverSocket;
 
     public HttpServer(int port) throws IOException {
         serverSocket = new ServerSocket(port);
@@ -25,6 +25,7 @@ public class HttpServer {
         Socket socket = serverSocket.accept();
         HttpRequest request = new HttpRequest(socket);
         String requestMethod = request.getRequestMethod();
+        System.out.println(requestMethod);
         switch (requestMethod) {
             case "GET":
                 get(socket, request);
@@ -48,11 +49,16 @@ public class HttpServer {
 
     }
 
-    public static void main(String[] args) throws IOException {
-        HttpServer server = new HttpServer(80);
-        HttpClient client = new HttpClient();
-        HttpResponse localhost = client.get("localhost", 80, "/");
-        System.out.println(localhost.getStatusLine());
+    public static void main(String[] args) {
+        try {
+            HttpServer server = new HttpServer(80);
+            HttpClient client = new HttpClient();
+            HttpResponse response = client.get("localhost", 80, "/");
+            System.out.println(response.getMessageBody());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

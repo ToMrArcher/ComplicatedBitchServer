@@ -6,7 +6,6 @@ public class HttpClient {
     public HttpResponse get(String host, int port, String path) throws IOException {
         Socket socket = new Socket(host, port);
         socket.getOutputStream().write(createGetRequest(path, host).getBytes());
-
         return new HttpResponse(socket);
     }
 

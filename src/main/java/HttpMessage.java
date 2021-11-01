@@ -1,13 +1,13 @@
 import java.io.IOException;
 import java.net.Socket;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 
 public class HttpMessage {
 
     private final String statusLine;
     private final Socket socket;
-    private final Map<String, String> headers = new HashMap();
+    private final HashMap<String, String> headers = new HashMap<>();
     private String messageBody = "";
 
     public HttpMessage(Socket socket) throws IOException {
@@ -19,10 +19,11 @@ public class HttpMessage {
             headers.put(line.substring(0, line.indexOf(":")), line.substring(line.indexOf(":") + 2));
         }
 
-        if(headers.containsKey("Content-Length") && headers.get("Content-Length") != "0"){
+        if(headers.containsKey("Content-Length") && !Objects.equals(headers.get("Content-Length"), "0")){
             int c;
             StringBuilder builder = new StringBuilder();
-            while((c = socket.getInputStream().read()) != -1){
+            for(int i = 0; i < Integer.parseInt(headers.get("Content-Length")); i++){
+                c = socket.getInputStream().read();
                 builder.append((char)c);
             }
             messageBody = builder.toString();
